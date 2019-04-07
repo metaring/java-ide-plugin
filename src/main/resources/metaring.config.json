@@ -1,0 +1,19 @@
+{
+  "system": {
+    "name": "MetaRing Plugin",
+    "executionEnvironment": "PRODUCTION"
+  },
+  "defaultConfiguration" : {
+    "url" : "https://proto.metaring.com/",
+    "functionalitiesPath" : "web/assets/scripts/",
+    "sourceGenPath" : "src-gen/"
+  },
+  "connection" : {
+    "connectionResource" : "call.sock",
+    "ipResource" : "ip.html"
+  },
+  "generate" : {
+    "resource" : "generate",
+    "functionalitiesFileName" : "functionalities.js"
+  }
+}
