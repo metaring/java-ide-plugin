@@ -59,7 +59,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>framework-java-auth</artifactId>
-            <version>1.1.1</version>
+            <version>1.1.5</version>
         </dependency>
     </dependencies>
 
