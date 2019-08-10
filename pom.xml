@@ -49,17 +49,17 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>platform-client</artifactId>
-            <version>1.1.8</version>
+            <version>1.2.1</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>framework-java-localization</artifactId>
-            <version>1.1.7</version>
+            <version>1.2.1</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>framework-java-auth</artifactId>
-            <version>1.1.9</version>
+            <version>1.2.3</version>
         </dependency>
     </dependencies>
 
