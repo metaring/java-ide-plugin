@@ -4,7 +4,7 @@
     "executionEnvironment": "PRODUCTION"
   },
   "defaultConfiguration" : {
-    "url" : "https://proto.metaring.com/",
+    "url" : "https://app.metaring.com/",
     "functionalitiesPath" : "web/assets/scripts/",
     "sourceGenPath" : "src-gen/"
   },

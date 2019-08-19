@@ -1,12 +1,12 @@
 /**
  *    Copyright 2019 MetaRing s.r.l.
- * 
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
- * 
+ *
  *        http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -30,14 +30,13 @@ import java.util.concurrent.CompletableFuture;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import com.metaring.plugin.ConnectionData;
-import com.metaring.plugin.Project;
-import com.metaring.plugin.WorkspaceManager;
-
-import com.metaring.framework.SysKB;
+import com.metaring.framework.Core;
 import com.metaring.framework.type.DataRepresentation;
 import com.metaring.framework.util.CryptoUtil;
 import com.metaring.framework.util.StringUtil;
+import com.metaring.plugin.ConnectionData;
+import com.metaring.plugin.Project;
+import com.metaring.plugin.WorkspaceManager;
 
 public class GenerateFunctionalityImpl extends GenerateFunctionality {
 
@@ -45,9 +44,6 @@ public class GenerateFunctionalityImpl extends GenerateFunctionality {
     public static final String CFG_RESOURCE = "resource";
     public static final String CFG_FUNCTIONALITIES_FILE_NAME = "functionalitiesFileName";
 
-    protected GenerateFunctionalityImpl(SysKB sysKB) {
-        super(sysKB);
-    }
 
     @Override
     protected CompletableFuture<Void> preConditionCheck() throws Exception {
@@ -92,7 +88,7 @@ public class GenerateFunctionalityImpl extends GenerateFunctionality {
                 DataRepresentation param = newDataRepresentation().add("projectId", project.getProject()).add("server", project.getServerGenerator()).add("client", project.getClientGenerator());
 
                 String payload = "payload=" + CryptoUtil.toBase64String(connectionData.encapsulate(this.getInfo(), param).toJson());
-                URL url = new URL(connectionData.url + this.getSysKB().get(CFG_GENERATE).getText(CFG_RESOURCE));
+                URL url = new URL(connectionData.url + Core.SYSKB.get(CFG_GENERATE).getText(CFG_RESOURCE));
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
                 httpURLConnection.setDoInput(true);
@@ -106,7 +102,7 @@ public class GenerateFunctionalityImpl extends GenerateFunctionality {
                     while ((zipEntry = zipInputStream.getNextEntry()) != null) {
                         try {
                             String path = sourceGenPath;
-                            if (zipEntry.getName().equals(this.getSysKB().get(CFG_GENERATE).getText(CFG_FUNCTIONALITIES_FILE_NAME))) {
+                            if (zipEntry.getName().equals(Core.SYSKB.get(CFG_GENERATE).getText(CFG_FUNCTIONALITIES_FILE_NAME))) {
                                 path = functionalitiesPath;
                             }
                             if(StringUtil.isNullOrEmpty(path)) {

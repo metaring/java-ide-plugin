@@ -2,14 +2,18 @@ package com.metaring.platform.project;
 
 import java.util.concurrent.CompletableFuture;
 
-import com.metaring.framework.SysKB;
 import com.metaring.framework.functionality.AbstractFunctionality;
+import com.metaring.framework.functionality.FunctionalityInfo;
 import com.metaring.framework.functionality.GeneratedFunctionality;
 
-public abstract class GenerateFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
+abstract class GenerateFunctionality extends AbstractFunctionality implements GeneratedFunctionality {
 
-    protected GenerateFunctionality(SysKB sysKB) {
-        super(sysKB, ProjectFunctionalitiesManager.GENERATE, GeneratedProject.class);
+    static final FunctionalityInfo INFO = FunctionalityInfo.create("com.metaring.platform.project.generate", false, true, false, "java.lang.String", "com.metaring.platform.project.GeneratedProject");
+
+    static final GenerateFunctionality INSTANCE = new GenerateFunctionalityImpl();
+
+    protected GenerateFunctionality() {
+        super(INFO, GeneratedProject.class);
     }
 
     @Override
@@ -106,9 +110,5 @@ public abstract class GenerateFunctionality extends AbstractFunctionality implem
 
     protected CompletableFuture<Void> afterPostConditionCheck(GeneratedProject output) throws Exception {
         return end;
-    }
-
-    protected static GenerateFunctionality create(SysKB sysKB) {
-        return new GenerateFunctionalityImpl(sysKB);
     }
 }
