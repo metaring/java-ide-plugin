@@ -44,7 +44,6 @@ public class GenerateFunctionalityImpl extends GenerateFunctionality {
     public static final String CFG_RESOURCE = "resource";
     public static final String CFG_FUNCTIONALITIES_FILE_NAME = "functionalitiesFileName";
 
-
     @Override
     protected CompletableFuture<Void> preConditionCheck() throws Exception {
         return end;
@@ -102,13 +101,13 @@ public class GenerateFunctionalityImpl extends GenerateFunctionality {
                     while ((zipEntry = zipInputStream.getNextEntry()) != null) {
                         try {
                             String path = sourceGenPath;
-                            if (zipEntry.getName().equals(Core.SYSKB.get(CFG_GENERATE).getText(CFG_FUNCTIONALITIES_FILE_NAME))) {
+                            if (zipEntry.getName().endsWith(Core.SYSKB.get(CFG_GENERATE).getText(CFG_FUNCTIONALITIES_FILE_NAME))) {
                                 path = functionalitiesPath;
                             }
                             if(StringUtil.isNullOrEmpty(path)) {
                                 continue;
                             }
-                            File outPath = new File(path + zipEntry.getName());
+                            File outPath = new File(path + zipEntry.getName().substring(zipEntry.getName().indexOf('/') + 1));
                             new File(outPath.getParent()).mkdirs();
                             try (FileOutputStream fileOutputStream = new FileOutputStream(outPath)) {
                                 read = 0;
